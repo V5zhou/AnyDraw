@@ -45,13 +45,22 @@
 ![image.png](http://upload-images.jianshu.io/upload_images/3913024-504320f9419e09ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ###### 粗细控制
+
 为下方工具栏中央Slider。
 
 每种笔的初始粗细与颜色可以独立控制，修改颜色后，只会修改对应笔的粗细与颜色属性。
 
 ######线条优化
 
-对于线条的流畅性，做了优化。方法是中点bezier，如下图所示。
+对于线条的流畅性，做了优化。方法是取中点，做二次bezier，如下图所示：
+
+![image.png](http://upload-images.jianshu.io/upload_images/3913024-19b430d2e7af794c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+其中绿色空心小点，是我们touchesMove时经过的point，但我们不能直接把point连接point去绘制，那样全是折线不流畅。
+
+如果此时正画到currunt点，向前取两个点：previous2、previous1，previous2与previous1中点为mid2，previous1与currunt中点为mid1，然后以previous1为控制点，mid2向mid1绘曲线，图中绿色部分。依次向后绘，就能得到平滑曲线。
+
+快速绘制时，此方法会导致线条显示偏移原有线路，不过一般看不出来。也考虑过用三次bizier成线，貌似线条不够自然。三次bezier参考[DEMO](https://www.zheng-hang.com/zb_users/upload/2015/04/201504121428779779603343.rar)
 
 ###### 绘制方式
 
