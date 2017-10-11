@@ -84,6 +84,7 @@
     _pageCtl.currentPage = 0;
     _pageCtl.pageIndicatorTintColor = RGBHEX_(#e5e5e5);
     _pageCtl.currentPageIndicatorTintColor = RGBHEX_(#666666);
+    _pageCtl.userInteractionEnabled = NO;
     [self addSubview:_pageCtl];
     
     //颜色选择器类型
