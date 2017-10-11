@@ -100,7 +100,7 @@
 
 - (IBAction)previousClick:(id)sender {
     if (_curruntStep < 1) {
-        NSLog(@"已回退到最前");
+        [SVProgressHUD showInfoWithStatus:@"已回退到最前"];
     }
     else {
         _curruntStep--;
@@ -110,7 +110,7 @@
 
 - (IBAction)nextClick:(id)sender {
     if (_curruntStep >= _paths.count) {
-        NSLog(@"无更多下一步");
+        [SVProgressHUD showInfoWithStatus:@"无更多下一步"];
     }
     else {
         _curruntStep++;
