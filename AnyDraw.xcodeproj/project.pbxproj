@@ -1,0 +1,550 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C6BECB49D92165B1824DE989 /* libPods-AnyDraw.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EF896A29DED7431751944D2 /* libPods-AnyDraw.a */; };
+		FC57EE611F7E2DCB00B425F4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE601F7E2DCB00B425F4 /* main.m */; };
+		FC57EE641F7E2DCB00B425F4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE631F7E2DCB00B425F4 /* AppDelegate.m */; };
+		FC57EE671F7E2DCB00B425F4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE661F7E2DCB00B425F4 /* ViewController.m */; };
+		FC57EE6A1F7E2DCB00B425F4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC57EE681F7E2DCB00B425F4 /* Main.storyboard */; };
+		FC57EE6C1F7E2DCB00B425F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC57EE6B1F7E2DCB00B425F4 /* Assets.xcassets */; };
+		FC57EE6F1F7E2DCB00B425F4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC57EE6D1F7E2DCB00B425F4 /* LaunchScreen.storyboard */; };
+		FC57EE851F7E2DDB00B425F4 /* NSString+size.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE781F7E2DDB00B425F4 /* NSString+size.m */; };
+		FC57EE861F7E2DDB00B425F4 /* NSTimer+block.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE7A1F7E2DDB00B425F4 /* NSTimer+block.m */; };
+		FC57EE871F7E2DDB00B425F4 /* UIButton+block.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE7C1F7E2DDB00B425F4 /* UIButton+block.m */; };
+		FC57EE881F7E2DDB00B425F4 /* UIColor+HEX.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE7E1F7E2DDB00B425F4 /* UIColor+HEX.m */; };
+		FC57EE891F7E2DDB00B425F4 /* UIImage+category.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE801F7E2DDB00B425F4 /* UIImage+category.m */; };
+		FC57EE8A1F7E2DDB00B425F4 /* UIView+createSubviews.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE821F7E2DDB00B425F4 /* UIView+createSubviews.m */; };
+		FC57EE8B1F7E2DDB00B425F4 /* UIView+expand.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE841F7E2DDB00B425F4 /* UIView+expand.m */; };
+		FC57EE8F1F7E2EB900B425F4 /* AnyDrawMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE8E1F7E2EB900B425F4 /* AnyDrawMainView.m */; };
+		FC57EE921F7E2FEE00B425F4 /* AnyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE911F7E2FEE00B425F4 /* AnyPath.m */; };
+		FC57EE961F7E30E400B425F4 /* AnyContext.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE951F7E30E400B425F4 /* AnyContext.m */; };
+		FC57EE981F7E3B1D00B425F4 /* AnyDrawMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC57EE971F7E3B1D00B425F4 /* AnyDrawMainView.xib */; };
+		FCDE40451F8B0C410097A0A1 /* AnyPublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE40441F8B0C410097A0A1 /* AnyPublicMethod.m */; };
+		FCDE404E1F8B242F0097A0A1 /* AnyCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE404D1F8B242F0097A0A1 /* AnyCanvasView.m */; };
+		FCDE40541F8B5FD10097A0A1 /* UIView+category.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE40531F8B5FD10097A0A1 /* UIView+category.m */; };
+		FCDE40591F8B68560097A0A1 /* AnyBrushBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE40581F8B68560097A0A1 /* AnyBrushBox.m */; };
+		FCDE405C1F8B6DE40097A0A1 /* AnyColorBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE405B1F8B6DE40097A0A1 /* AnyColorBox.m */; };
+		FCDE40601F8C60000097A0A1 /* AnyBitMap.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE405F1F8C60000097A0A1 /* AnyBitMap.m */; };
+		FCDE40661F8DB5490097A0A1 /* Photos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDE40651F8DB5490097A0A1 /* Photos.framework */; };
+		FCDE40691F8DCBB00097A0A1 /* AnyCanvasPicture.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE40681F8DCBB00097A0A1 /* AnyCanvasPicture.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		48BFF5F29250DE39180A4170 /* Pods-AnyDraw.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyDraw.release.xcconfig"; path = "Pods/Target Support Files/Pods-AnyDraw/Pods-AnyDraw.release.xcconfig"; sourceTree = "<group>"; };
+		589D5B2E47410E0A4E328327 /* Pods-AnyDraw.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnyDraw.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AnyDraw/Pods-AnyDraw.debug.xcconfig"; sourceTree = "<group>"; };
+		8EF896A29DED7431751944D2 /* libPods-AnyDraw.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AnyDraw.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC57EE5C1F7E2DCB00B425F4 /* AnyDraw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnyDraw.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC57EE601F7E2DCB00B425F4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FC57EE621F7E2DCB00B425F4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FC57EE631F7E2DCB00B425F4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FC57EE651F7E2DCB00B425F4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FC57EE661F7E2DCB00B425F4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FC57EE691F7E2DCB00B425F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FC57EE6B1F7E2DCB00B425F4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC57EE6E1F7E2DCB00B425F4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FC57EE701F7E2DCB00B425F4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC57EE771F7E2DDB00B425F4 /* NSString+size.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+size.h"; sourceTree = "<group>"; };
+		FC57EE781F7E2DDB00B425F4 /* NSString+size.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+size.m"; sourceTree = "<group>"; };
+		FC57EE791F7E2DDB00B425F4 /* NSTimer+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+block.h"; sourceTree = "<group>"; };
+		FC57EE7A1F7E2DDB00B425F4 /* NSTimer+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+block.m"; sourceTree = "<group>"; };
+		FC57EE7B1F7E2DDB00B425F4 /* UIButton+block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+block.h"; sourceTree = "<group>"; };
+		FC57EE7C1F7E2DDB00B425F4 /* UIButton+block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+block.m"; sourceTree = "<group>"; };
+		FC57EE7D1F7E2DDB00B425F4 /* UIColor+HEX.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HEX.h"; sourceTree = "<group>"; };
+		FC57EE7E1F7E2DDB00B425F4 /* UIColor+HEX.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HEX.m"; sourceTree = "<group>"; };
+		FC57EE7F1F7E2DDB00B425F4 /* UIImage+category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+category.h"; sourceTree = "<group>"; };
+		FC57EE801F7E2DDB00B425F4 /* UIImage+category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+category.m"; sourceTree = "<group>"; };
+		FC57EE811F7E2DDB00B425F4 /* UIView+createSubviews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+createSubviews.h"; sourceTree = "<group>"; };
+		FC57EE821F7E2DDB00B425F4 /* UIView+createSubviews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+createSubviews.m"; sourceTree = "<group>"; };
+		FC57EE831F7E2DDB00B425F4 /* UIView+expand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+expand.h"; sourceTree = "<group>"; };
+		FC57EE841F7E2DDB00B425F4 /* UIView+expand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+expand.m"; sourceTree = "<group>"; };
+		FC57EE8C1F7E2E4800B425F4 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		FC57EE8D1F7E2EB900B425F4 /* AnyDrawMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyDrawMainView.h; sourceTree = "<group>"; };
+		FC57EE8E1F7E2EB900B425F4 /* AnyDrawMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyDrawMainView.m; sourceTree = "<group>"; };
+		FC57EE901F7E2FEE00B425F4 /* AnyPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyPath.h; sourceTree = "<group>"; };
+		FC57EE911F7E2FEE00B425F4 /* AnyPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyPath.m; sourceTree = "<group>"; };
+		FC57EE931F7E304900B425F4 /* AnyPublicDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnyPublicDefine.h; sourceTree = "<group>"; };
+		FC57EE941F7E30E400B425F4 /* AnyContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyContext.h; sourceTree = "<group>"; };
+		FC57EE951F7E30E400B425F4 /* AnyContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyContext.m; sourceTree = "<group>"; };
+		FC57EE971F7E3B1D00B425F4 /* AnyDrawMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnyDrawMainView.xib; sourceTree = "<group>"; };
+		FCDE40431F8B0C410097A0A1 /* AnyPublicMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyPublicMethod.h; sourceTree = "<group>"; };
+		FCDE40441F8B0C410097A0A1 /* AnyPublicMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyPublicMethod.m; sourceTree = "<group>"; };
+		FCDE404C1F8B242F0097A0A1 /* AnyCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyCanvasView.h; sourceTree = "<group>"; };
+		FCDE404D1F8B242F0097A0A1 /* AnyCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyCanvasView.m; sourceTree = "<group>"; };
+		FCDE40521F8B5FD10097A0A1 /* UIView+category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+category.h"; sourceTree = "<group>"; };
+		FCDE40531F8B5FD10097A0A1 /* UIView+category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+category.m"; sourceTree = "<group>"; };
+		FCDE40571F8B68560097A0A1 /* AnyBrushBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyBrushBox.h; sourceTree = "<group>"; };
+		FCDE40581F8B68560097A0A1 /* AnyBrushBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyBrushBox.m; sourceTree = "<group>"; };
+		FCDE405A1F8B6DE40097A0A1 /* AnyColorBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyColorBox.h; sourceTree = "<group>"; };
+		FCDE405B1F8B6DE40097A0A1 /* AnyColorBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyColorBox.m; sourceTree = "<group>"; };
+		FCDE405E1F8C60000097A0A1 /* AnyBitMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyBitMap.h; sourceTree = "<group>"; };
+		FCDE405F1F8C60000097A0A1 /* AnyBitMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyBitMap.m; sourceTree = "<group>"; };
+		FCDE40651F8DB5490097A0A1 /* Photos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Photos.framework; path = System/Library/Frameworks/Photos.framework; sourceTree = SDKROOT; };
+		FCDE40671F8DCBB00097A0A1 /* AnyCanvasPicture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyCanvasPicture.h; sourceTree = "<group>"; };
+		FCDE40681F8DCBB00097A0A1 /* AnyCanvasPicture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyCanvasPicture.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC57EE591F7E2DCB00B425F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCDE40661F8DB5490097A0A1 /* Photos.framework in Frameworks */,
+				C6BECB49D92165B1824DE989 /* libPods-AnyDraw.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D3363EE10149470F8377475E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				589D5B2E47410E0A4E328327 /* Pods-AnyDraw.debug.xcconfig */,
+				48BFF5F29250DE39180A4170 /* Pods-AnyDraw.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FC57EE531F7E2DCB00B425F4 = {
+			isa = PBXGroup;
+			children = (
+				FC57EE5E1F7E2DCB00B425F4 /* AnyDraw */,
+				FC57EE5D1F7E2DCB00B425F4 /* Products */,
+				FCDE40641F8DB5490097A0A1 /* Frameworks */,
+				D3363EE10149470F8377475E /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		FC57EE5D1F7E2DCB00B425F4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC57EE5C1F7E2DCB00B425F4 /* AnyDraw.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC57EE5E1F7E2DCB00B425F4 /* AnyDraw */ = {
+			isa = PBXGroup;
+			children = (
+				FC57EE621F7E2DCB00B425F4 /* AppDelegate.h */,
+				FC57EE631F7E2DCB00B425F4 /* AppDelegate.m */,
+				FC57EE651F7E2DCB00B425F4 /* ViewController.h */,
+				FC57EE661F7E2DCB00B425F4 /* ViewController.m */,
+				FCDE405D1F8B817E0097A0A1 /* ToolBox */,
+				FCDE40561F8B683A0097A0A1 /* MainView */,
+				FCDE40551F8B682E0097A0A1 /* Models */,
+				FC57EE761F7E2DDB00B425F4 /* Categorys */,
+				FC57EE681F7E2DCB00B425F4 /* Main.storyboard */,
+				FC57EE8C1F7E2E4800B425F4 /* PrefixHeader.pch */,
+				FC57EE931F7E304900B425F4 /* AnyPublicDefine.h */,
+				FCDE40431F8B0C410097A0A1 /* AnyPublicMethod.h */,
+				FCDE40441F8B0C410097A0A1 /* AnyPublicMethod.m */,
+				FC57EE6B1F7E2DCB00B425F4 /* Assets.xcassets */,
+				FC57EE6D1F7E2DCB00B425F4 /* LaunchScreen.storyboard */,
+				FC57EE701F7E2DCB00B425F4 /* Info.plist */,
+				FC57EE5F1F7E2DCB00B425F4 /* Supporting Files */,
+			);
+			path = AnyDraw;
+			sourceTree = "<group>";
+		};
+		FC57EE5F1F7E2DCB00B425F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC57EE601F7E2DCB00B425F4 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC57EE761F7E2DDB00B425F4 /* Categorys */ = {
+			isa = PBXGroup;
+			children = (
+				FC57EE771F7E2DDB00B425F4 /* NSString+size.h */,
+				FC57EE781F7E2DDB00B425F4 /* NSString+size.m */,
+				FC57EE791F7E2DDB00B425F4 /* NSTimer+block.h */,
+				FC57EE7A1F7E2DDB00B425F4 /* NSTimer+block.m */,
+				FC57EE7B1F7E2DDB00B425F4 /* UIButton+block.h */,
+				FC57EE7C1F7E2DDB00B425F4 /* UIButton+block.m */,
+				FC57EE7D1F7E2DDB00B425F4 /* UIColor+HEX.h */,
+				FC57EE7E1F7E2DDB00B425F4 /* UIColor+HEX.m */,
+				FC57EE7F1F7E2DDB00B425F4 /* UIImage+category.h */,
+				FC57EE801F7E2DDB00B425F4 /* UIImage+category.m */,
+				FC57EE811F7E2DDB00B425F4 /* UIView+createSubviews.h */,
+				FC57EE821F7E2DDB00B425F4 /* UIView+createSubviews.m */,
+				FC57EE831F7E2DDB00B425F4 /* UIView+expand.h */,
+				FC57EE841F7E2DDB00B425F4 /* UIView+expand.m */,
+				FCDE40521F8B5FD10097A0A1 /* UIView+category.h */,
+				FCDE40531F8B5FD10097A0A1 /* UIView+category.m */,
+			);
+			path = Categorys;
+			sourceTree = "<group>";
+		};
+		FCDE40551F8B682E0097A0A1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FC57EE941F7E30E400B425F4 /* AnyContext.h */,
+				FC57EE951F7E30E400B425F4 /* AnyContext.m */,
+				FC57EE901F7E2FEE00B425F4 /* AnyPath.h */,
+				FC57EE911F7E2FEE00B425F4 /* AnyPath.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		FCDE40561F8B683A0097A0A1 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				FC57EE8D1F7E2EB900B425F4 /* AnyDrawMainView.h */,
+				FC57EE8E1F7E2EB900B425F4 /* AnyDrawMainView.m */,
+				FC57EE971F7E3B1D00B425F4 /* AnyDrawMainView.xib */,
+				FCDE404C1F8B242F0097A0A1 /* AnyCanvasView.h */,
+				FCDE404D1F8B242F0097A0A1 /* AnyCanvasView.m */,
+				FCDE405E1F8C60000097A0A1 /* AnyBitMap.h */,
+				FCDE405F1F8C60000097A0A1 /* AnyBitMap.m */,
+			);
+			name = MainView;
+			sourceTree = "<group>";
+		};
+		FCDE405D1F8B817E0097A0A1 /* ToolBox */ = {
+			isa = PBXGroup;
+			children = (
+				FCDE40571F8B68560097A0A1 /* AnyBrushBox.h */,
+				FCDE40581F8B68560097A0A1 /* AnyBrushBox.m */,
+				FCDE405A1F8B6DE40097A0A1 /* AnyColorBox.h */,
+				FCDE405B1F8B6DE40097A0A1 /* AnyColorBox.m */,
+				FCDE40671F8DCBB00097A0A1 /* AnyCanvasPicture.h */,
+				FCDE40681F8DCBB00097A0A1 /* AnyCanvasPicture.m */,
+			);
+			name = ToolBox;
+			sourceTree = "<group>";
+		};
+		FCDE40641F8DB5490097A0A1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCDE40651F8DB5490097A0A1 /* Photos.framework */,
+				8EF896A29DED7431751944D2 /* libPods-AnyDraw.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC57EE5B1F7E2DCB00B425F4 /* AnyDraw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC57EE731F7E2DCB00B425F4 /* Build configuration list for PBXNativeTarget "AnyDraw" */;
+			buildPhases = (
+				87F4FADEB7F8CBDC1BD88A5C /* [CP] Check Pods Manifest.lock */,
+				FC57EE581F7E2DCB00B425F4 /* Sources */,
+				FC57EE591F7E2DCB00B425F4 /* Frameworks */,
+				FC57EE5A1F7E2DCB00B425F4 /* Resources */,
+				C1A3FBE1DEABB32C67A0ECA5 /* [CP] Embed Pods Frameworks */,
+				FB95ABA77249660360EBBF52 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AnyDraw;
+			productName = AnyDraw;
+			productReference = FC57EE5C1F7E2DCB00B425F4 /* AnyDraw.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC57EE541F7E2DCB00B425F4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = zmz;
+				TargetAttributes = {
+					FC57EE5B1F7E2DCB00B425F4 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = FC57EE571F7E2DCB00B425F4 /* Build configuration list for PBXProject "AnyDraw" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FC57EE531F7E2DCB00B425F4;
+			productRefGroup = FC57EE5D1F7E2DCB00B425F4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC57EE5B1F7E2DCB00B425F4 /* AnyDraw */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC57EE5A1F7E2DCB00B425F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC57EE6F1F7E2DCB00B425F4 /* LaunchScreen.storyboard in Resources */,
+				FC57EE6C1F7E2DCB00B425F4 /* Assets.xcassets in Resources */,
+				FC57EE981F7E3B1D00B425F4 /* AnyDrawMainView.xib in Resources */,
+				FC57EE6A1F7E2DCB00B425F4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		87F4FADEB7F8CBDC1BD88A5C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C1A3FBE1DEABB32C67A0ECA5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AnyDraw/Pods-AnyDraw-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB95ABA77249660360EBBF52 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AnyDraw/Pods-AnyDraw-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC57EE581F7E2DCB00B425F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC57EE8B1F7E2DDB00B425F4 /* UIView+expand.m in Sources */,
+				FC57EE851F7E2DDB00B425F4 /* NSString+size.m in Sources */,
+				FC57EE8F1F7E2EB900B425F4 /* AnyDrawMainView.m in Sources */,
+				FC57EE961F7E30E400B425F4 /* AnyContext.m in Sources */,
+				FC57EE861F7E2DDB00B425F4 /* NSTimer+block.m in Sources */,
+				FC57EE671F7E2DCB00B425F4 /* ViewController.m in Sources */,
+				FCDE405C1F8B6DE40097A0A1 /* AnyColorBox.m in Sources */,
+				FC57EE8A1F7E2DDB00B425F4 /* UIView+createSubviews.m in Sources */,
+				FC57EE881F7E2DDB00B425F4 /* UIColor+HEX.m in Sources */,
+				FC57EE641F7E2DCB00B425F4 /* AppDelegate.m in Sources */,
+				FC57EE611F7E2DCB00B425F4 /* main.m in Sources */,
+				FCDE40451F8B0C410097A0A1 /* AnyPublicMethod.m in Sources */,
+				FC57EE921F7E2FEE00B425F4 /* AnyPath.m in Sources */,
+				FCDE40691F8DCBB00097A0A1 /* AnyCanvasPicture.m in Sources */,
+				FCDE404E1F8B242F0097A0A1 /* AnyCanvasView.m in Sources */,
+				FC57EE871F7E2DDB00B425F4 /* UIButton+block.m in Sources */,
+				FCDE40601F8C60000097A0A1 /* AnyBitMap.m in Sources */,
+				FCDE40591F8B68560097A0A1 /* AnyBrushBox.m in Sources */,
+				FCDE40541F8B5FD10097A0A1 /* UIView+category.m in Sources */,
+				FC57EE891F7E2DDB00B425F4 /* UIImage+category.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC57EE681F7E2DCB00B425F4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC57EE691F7E2DCB00B425F4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FC57EE6D1F7E2DCB00B425F4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC57EE6E1F7E2DCB00B425F4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC57EE711F7E2DCB00B425F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FC57EE721F7E2DCB00B425F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FC57EE741F7E2DCB00B425F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 589D5B2E47410E0A4E328327 /* Pods-AnyDraw.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AnyDraw/PrefixHeader.pch;
+				INFOPLIST_FILE = AnyDraw/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = aicai.AnyDraw;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Debug;
+		};
+		FC57EE751F7E2DCB00B425F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48BFF5F29250DE39180A4170 /* Pods-AnyDraw.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AnyDraw/PrefixHeader.pch;
+				INFOPLIST_FILE = AnyDraw/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = aicai.AnyDraw;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC57EE571F7E2DCB00B425F4 /* Build configuration list for PBXProject "AnyDraw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC57EE711F7E2DCB00B425F4 /* Debug */,
+				FC57EE721F7E2DCB00B425F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC57EE731F7E2DCB00B425F4 /* Build configuration list for PBXNativeTarget "AnyDraw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC57EE741F7E2DCB00B425F4 /* Debug */,
+				FC57EE751F7E2DCB00B425F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC57EE541F7E2DCB00B425F4 /* Project object */;
+}
