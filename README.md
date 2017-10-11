@@ -71,3 +71,7 @@
 4. bezier上点的方向还未判定。
 
 喜欢的话，请star，谢谢支持。欢迎提出好的建议，fork共同改进代码。
+
+我的简书：http://www.jianshu.com/p/deb107a1ec36
+我的
+
