@@ -14,6 +14,6 @@
 
 @property (nonatomic, strong) AnyContext *curruntContext;   ///< 当前绘制环境
 
-@property (nonatomic, strong) void(^stepCallBack)(AnyTouchesType touchType, AnyPath *curruntPath);
+@property (nonatomic, strong) void(^stepCallBack)(AnyPath *curruntPath, UIImage *canvasImage);
 
 @end

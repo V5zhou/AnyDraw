@@ -27,11 +27,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *colorBtn;
 
 //图片保存路径
-@property (nonatomic, assign) NSInteger curruntStep;        ///< 当前步骤
 @property (nonatomic, copy)   NSString *stepCachePath;      ///< 缓存步骤路径
 
 //前进后退
-@property (nonatomic, strong) NSMutableArray<AnyPath *> *paths;        ///< 所有路径
+@property (nonatomic, assign) NSInteger totalStep;          ///< 最大步骤
+@property (nonatomic, assign) NSInteger curruntStep;        ///< 当前步骤
 
 @property (nonatomic, copy)   NSString *canvasImageName;    ///< 当前画布背景图片名
 
@@ -54,7 +54,6 @@
     NSString *localURL = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     localURL = [localURL stringByAppendingFormat:@"/StepCache/%lf", [[NSDate date] timeIntervalSince1970]];
     _stepCachePath = localURL;
-    _paths = [NSMutableArray array];
     
     //设置默认圆珠笔
     kWeakSelf
@@ -63,29 +62,13 @@
     }];
     
     //设置每一步的回调：使step加1、图片保存本地
-    [_canvasView setStepCallBack:^(AnyTouchesType touchType, AnyPath *curruntPath){
-        switch (touchType) {
-            case AnyTouchesType_began: {
-                //控制前进后退
-                while (weakSelf.paths.count > weakSelf.curruntStep) {
-                    [weakSelf.paths removeLastObject];
-                }
-                [weakSelf.paths addObject:curruntPath];
-                weakSelf.curruntStep++;
-            }
-                break;
-            case AnyTouchesType_move: {
-                
-            }
-                break;
-            case AnyTouchesType_end: {
-                //开始生成图片
-                UIImage *image = [weakSelf.canvasView screenShot];
-                weakSelf.canvasView.layer.contents = (__bridge id _Nullable)(image.CGImage);
-                [weakSelf cacheImage:image fileName:[NSString stringWithFormat:@"%0.4ld", weakSelf.curruntStep]];
-            }
-                break;
-        }
+    [_canvasView setStepCallBack:^(AnyPath *curruntPath, UIImage *canvasImage){
+        //控制前进后退
+        weakSelf.curruntStep++;
+        weakSelf.totalStep = weakSelf.curruntStep;
+        
+        //存入本地
+        [weakSelf cacheImage:canvasImage fileName:[NSString stringWithFormat:@"%0.4ld", weakSelf.curruntStep]];
     }];
 }
 
@@ -109,7 +92,7 @@
 }
 
 - (IBAction)nextClick:(id)sender {
-    if (_curruntStep >= _paths.count) {
+    if (_curruntStep >= _totalStep) {
         [SVProgressHUD showInfoWithStatus:@"无更多下一步"];
     }
     else {
@@ -120,7 +103,7 @@
 
 - (IBAction)clearClick:(id)sender {
     self.curruntStep = 0;
-    [self.paths removeAllObjects];
+    self.totalStep = 0;
     self.canvasView.layer.contents = nil;
     //删除所有本地缓存
     [self deleteAllCaches];

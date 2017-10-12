@@ -75,7 +75,31 @@
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     kWeakSelf
     self.curruntPath = [AnyPath createWithContext:_curruntContext callBack:^(BOOL isBitmap, UIBezierPath *bezier, AnyTouchesType touchType) {
-        //一种通过path直接画，另一种在bitMap上画
+        //当前layer更新后回调
+        void (^layerRefreshFinishedCallBack)(void) = ^() {
+            
+            if (touchType == AnyTouchesType_end) {
+                //开始生成图片
+                UIImage *canvasImage = [weakSelf screenShot];
+                weakSelf.layer.contents = (__bridge id _Nullable)(canvasImage.CGImage);
+                
+                //通知AnyDrawMainView保存新步骤
+                if (weakSelf.stepCallBack) {
+                    weakSelf.stepCallBack(weakSelf.curruntPath, canvasImage);
+                }
+                
+                //清除子layer当前笔,准备接收下一笔
+                if (isBitmap) {
+                    weakSelf.shapLayer.contents = nil;
+                    [weakSelf.bitmap endBitMap];
+                }
+                else {
+                    weakSelf.shapLayer.path = nil;
+                }
+            }
+        };
+        
+        //一种通过path直接画，另一种在bitMap上画，完成layer更新后执行回调
         if (isBitmap) {
             switch (touchType) {
                 case AnyTouchesType_began:
@@ -84,17 +108,13 @@
                 }
                     break;
                 case AnyTouchesType_move:
-                {
-                    weakSelf.shapLayer.contents = (__bridge id _Nullable)([weakSelf.bitmap addBezier:bezier].CGImage);
-                }
-                    break;
                 case AnyTouchesType_end:
                 {
-                    weakSelf.shapLayer.contents = (__bridge id _Nullable)([weakSelf.bitmap addBezier:bezier].CGImage);
+                    [weakSelf.bitmap addBezier:bezier resultImage:^(UIImage *image) {
+                        weakSelf.shapLayer.contents = (__bridge id _Nullable)(image.CGImage);
+                        layerRefreshFinishedCallBack();
+                    }];
                 }
-                    break;
-                    
-                default:
                     break;
             }
         }
@@ -109,33 +129,18 @@
                 layer.lineWidth = weakSelf.curruntContext.lineWidth;
                 layer.path = bezier.CGPath;
             }
-        }
-        
-        //通知AnyDrawMainView保存新步骤
-        if (weakSelf.stepCallBack) {
-            weakSelf.stepCallBack(touchType, weakSelf.curruntPath);
-        }
-        
-        //清除子layer当前笔,准备接收下一笔
-        if (touchType == AnyTouchesType_end) {
-            if (isBitmap) {
-                weakSelf.shapLayer.contents = nil;
-                [weakSelf.bitmap endBitMap];
-            }
-            else {
-                weakSelf.shapLayer.path = nil;
-            }
+            layerRefreshFinishedCallBack();
         }
     }];
-    [_curruntPath moveToPoint:TouchPoint(touches) touchType:AnyTouchesType_began];
+    [_curruntPath asyncMoveToPoint:TouchPoint(touches) touchType:AnyTouchesType_began];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [_curruntPath moveToPoint:TouchPoint(touches) touchType:AnyTouchesType_move];
+    [_curruntPath asyncMoveToPoint:TouchPoint(touches) touchType:AnyTouchesType_move];
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    [_curruntPath moveToPoint:TouchPoint(touches) touchType:AnyTouchesType_end];
+    [_curruntPath asyncMoveToPoint:TouchPoint(touches) touchType:AnyTouchesType_end];
 }
 
 static CGPoint TouchPoint(NSSet<UITouch *> *touches) {

@@ -25,8 +25,8 @@ typedef void(^AnyPathCallBack)(BOOL isBitmap, UIBezierPath *bezier, AnyTouchesTy
 + (instancetype)createWithContext:(AnyContext *)context callBack:(AnyPathCallBack)callBack;
 
 /**
- 接收点
+ 异步处理接收点
  */
-- (void)moveToPoint:(CGPoint)point touchType:(AnyTouchesType)touchType;
+- (void)asyncMoveToPoint:(CGPoint)point touchType:(AnyTouchesType)touchType;
 
 @end

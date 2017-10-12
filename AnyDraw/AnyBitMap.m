@@ -44,14 +44,20 @@
     }
 }
 
-- (UIImage *)addBezier:(UIBezierPath *)bezier {
-    CGPathApply(bezier.CGPath, (__bridge void * _Nullable)(self), DrawLayerCGPathApply);
-    
-    //取出图片
-    CGImageRef cgImage = CGBitmapContextCreateImage(self.map);
-    UIImage *image = [UIImage imageWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    return image;
+- (void)addBezier:(UIBezierPath *)bezier resultImage:(void(^)(UIImage *image))resultImage {
+    kWeakSelf
+    AsyncSerierBitMapQueue(^{
+        CGPathApply(bezier.CGPath, (__bridge void * _Nullable)(weakSelf), DrawLayerCGPathApply);
+        //取出图片
+        CGImageRef cgImage = CGBitmapContextCreateImage(weakSelf.map);
+        UIImage *image = [UIImage imageWithCGImage:cgImage];
+        CGImageRelease(cgImage);
+        if (resultImage) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                resultImage(image);
+            });
+        }
+    });
 }
 
 #pragma mark - 线宽与分段数
@@ -221,6 +227,22 @@ static CGPoint tElementPoint(CGPathElementType type, CGPoint Point0, CGPoint *po
         _drawImage = [image imageWithColor:_context.strokeColor];
     }
     return _drawImage;
+}
+
+//异步串行队列执行
+void AsyncSerierBitMapQueue(void(^threadContents)(void)) {
+    static dispatch_queue_t queue;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+#ifdef __IPHONE_8_0
+        dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_DEFAULT, 0);
+        queue = dispatch_queue_create("com.AnyBitMap.caculate", attr);
+#else
+        queue = dispatch_queue_create("com.AnyBitMap.caculate", DISPATCH_QUEUE_SERIAL);
+        dispatch_set_target_queue(queue, dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0));
+#endif
+    });
+    dispatch_async(queue, threadContents);
 }
 
 @end
