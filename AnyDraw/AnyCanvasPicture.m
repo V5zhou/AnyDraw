@@ -157,12 +157,11 @@
 - (NSMutableArray<NSString *> *)imageNames {
     if (!_imageNames) {
         _imageNames = [NSMutableArray array];
-        
+        [_imageNames addObject:@"无画布"];
         for (NSInteger i = 0; i < 6; i++) {
             NSString *imageName = [NSString stringWithFormat:@"画布%ld", i + 1];
             [_imageNames addObject:imageName];
         }
-        [_imageNames addObject:@"无画布"];
     }
     return _imageNames;
 }

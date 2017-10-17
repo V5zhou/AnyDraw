@@ -47,7 +47,7 @@
 
 - (void)loadDefaultSetting {
     //设置底纹1
-    _canvasImageName = @"画布1";
+    _canvasImageName = @"无画布";
     _canvasBackView.layer.contents = (__bridge id _Nullable)([UIImage imageNamed:_canvasImageName].CGImage);
     
     //设置缓存路径

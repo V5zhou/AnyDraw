@@ -12,7 +12,8 @@
 
 @property (nonatomic, assign) CGContextRef map;
 @property (nonatomic, strong) AnyContext *context;
-@property (nonatomic, assign) CGPoint lastStrokePoint;  //上次绘制点
+@property (nonatomic, assign) CGPoint lastPoint;        //上次点
+@property (nonatomic, assign) CGFloat extraLength;      //多余长度
 @property (nonatomic, assign) CGPoint movePoint;        //记录move动作
 @property (nonatomic, strong) UIImage *drawImage;
 
@@ -89,11 +90,11 @@ static CGFloat LineWidth(AnyContext *context, CGFloat pathLength) {
 /**
  一个线宽长度上分段段数，段数越多绘制点越密集
  */
-static NSInteger PointsEachWidth(AnyContext *context) {
-    NSInteger widthPoints = 1;
+static CGFloat PointsEachWidth(AnyContext *context) {
+    CGFloat widthPoints = 1;
     switch (context.brushType) {
         case AnyBrushType_MiPen:
-            widthPoints = 2;
+            widthPoints = 1.5;
             break;
         case AnyBrushType_TiltPen:
             widthPoints = 4;
@@ -132,25 +133,27 @@ static void DrawLayerCGPathApply(void * __nullable info, const CGPathElement *el
             //宽度计算
             CGFloat lineWidth = LineWidth(bitMap.context, roughlyLength);
             //每个线宽N个点
-            NSInteger widthPoints = PointsEachWidth(bitMap.context);
+            CGFloat widthPoints = PointsEachWidth(bitMap.context);
             //点之间距离
             CGFloat pointSpace = lineWidth/widthPoints;
             //此bezier上点个数
             CGFloat pointNum = MAX(roughlyLength/pointSpace, 1);
             
             //绘制
-            CGPoint lastPoint = CGPointZero;
-            for (NSInteger i = 0; i <= pointNum * 3; i++) {
-                CGFloat t = i/(pointNum * 3);
+            for (NSInteger i = 0; i <= pointNum * 10; i++) {
+                CGFloat t = i/(pointNum * 10);
                 CGPoint point = tElementPoint(type, bitMap.movePoint, points, t);
                 if (i > 0) {
-                    CGFloat length = sqrt(pow(bitMap.lastStrokePoint.x - point.x, 2) + pow(bitMap.lastStrokePoint.y - point.y, 2));
+                    CGFloat length = sqrt(pow(bitMap.lastPoint.x - point.x, 2) + pow(bitMap.lastPoint.y - point.y, 2)) + bitMap.extraLength;
                     if (length >= pointSpace) {
-                        DrawPoint(bitMap, lastPoint, point, lineWidth);
-                        bitMap.lastStrokePoint = point;
+                        DrawPoint(bitMap, bitMap.lastPoint, point, lineWidth);
+                        bitMap.extraLength = 0;
+                    }
+                    else {
+                        bitMap.extraLength = length;
                     }
                 }
-                lastPoint = point;
+                bitMap.lastPoint = point;
             }
         }
             break;
@@ -159,14 +162,14 @@ static void DrawLayerCGPathApply(void * __nullable info, const CGPathElement *el
     }
 }
 
-
 /**
  绘制点
  */
 static void DrawPoint(AnyBitMap *bitMap, CGPoint lastPoint, CGPoint curruntPoint, CGFloat lineWidth) {
     CGContextSaveGState(bitMap.map);
     CGContextTranslateCTM(bitMap.map, curruntPoint.x, curruntPoint.y);
-    if (bitMap.context.brushType == AnyBrushType_Fish) {
+    if (bitMap.context.brushType == AnyBrushType_Fish ||
+        bitMap.context.brushType == AnyBrushType_MiPen) {
         CGFloat rotate = atan2(curruntPoint.y - lastPoint.y, curruntPoint.x - lastPoint.x);
         CGContextRotateCTM(bitMap.map, rotate - M_PI_2);
     }
