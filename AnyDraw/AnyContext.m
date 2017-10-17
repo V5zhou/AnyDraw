@@ -71,6 +71,14 @@
             _strokeColor = [UIColor clearColor];
         }
             break;
+        case AnyBrushType_Crayon:
+        {
+            _maxWidth = 40;
+            _minWidth = 15;
+            _lineWidth = 20;
+            _strokeColor = [UIColor colorWithHex:0xff1111 andAlpha:0.8];
+        }
+            break;
     }
 }
 

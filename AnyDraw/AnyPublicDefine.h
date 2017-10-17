@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, AnyBrushType) {
     AnyBrushType_Spray,         ///< 喷枪
     AnyBrushType_Eraser,        ///< 橡皮擦
     AnyBrushType_Fish,          ///< 鱼形笔
+    AnyBrushType_Crayon,        ///< 蜡笔
 };
 
 #pragma mark - 颜色选择器

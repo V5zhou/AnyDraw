@@ -197,9 +197,9 @@
 static NSArray *DefaultColors() {
     return @[
              [UIColor colorWithHex:0x142522 andAlpha:0.8],
+             [UIColor colorWithHex:0xff1111 andAlpha:0.8],
              [UIColor colorWithHex:0xe93e47 andAlpha:0.8],
              [UIColor colorWithHex:0xe27555 andAlpha:0.8],
-             [UIColor colorWithHex:0xfce1dd andAlpha:0.8],
              [UIColor colorWithHex:0x55af6c andAlpha:0.8],
              [UIColor colorWithHex:0x97e5d0 andAlpha:0.8],
              

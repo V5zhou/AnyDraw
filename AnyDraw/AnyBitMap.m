@@ -12,6 +12,7 @@
 
 @property (nonatomic, assign) CGContextRef map;
 @property (nonatomic, strong) AnyContext *context;
+@property (nonatomic, assign) BOOL hasFoundFirstPoint;  //已经找到第一个点
 @property (nonatomic, assign) CGPoint lastPoint;        //上次点
 @property (nonatomic, assign) CGFloat extraLength;      //多余长度
 @property (nonatomic, assign) CGPoint movePoint;        //记录move动作
@@ -33,6 +34,25 @@
                                     4 * size.width,
                                     colorSpace,
                                     kCGImageAlphaPremultipliedLast);
+    
+    if (context.brushType == AnyBrushType_Crayon) {
+        //绘制蜡笔纹理图片
+        UIImage *image = [UIImage imageNamed:@"texture01"];
+        UIImage *texttureImage = [UIImage imageWithSize:size drawBlock:^(CGContextRef context) {
+            for (NSInteger i = 0; ; i++) {
+                if (image.size.height * i > size.height) {
+                    break;
+                }
+                for (NSInteger j = 0; ; j++) {
+                    if (image.size.width * j > size.width) {
+                        break;
+                    }
+                    CGContextDrawImage(context, CGRectMake(image.size.width * j, image.size.height * i, image.size.width, image.size.height), image.CGImage);
+                }
+            }
+        }];
+        CGContextClipToMask(bitMap.map, CGRectMake(0, 0, size.width, size.height), texttureImage.CGImage);
+    }
     CGContextTranslateCTM(bitMap.map, 0, size.height);
     CGContextScaleCTM(bitMap.map, 1.0, -1.0);
     CGColorSpaceRelease( colorSpace );
@@ -102,6 +122,9 @@ static CGFloat PointsEachWidth(AnyContext *context) {
         case AnyBrushType_Spray:
             widthPoints = 5;
             break;
+        case AnyBrushType_Crayon:
+            widthPoints = 6;
+            break;
             
         default:
             break;
@@ -143,7 +166,13 @@ static void DrawLayerCGPathApply(void * __nullable info, const CGPathElement *el
             for (NSInteger i = 0; i <= pointNum * 10; i++) {
                 CGFloat t = i/(pointNum * 10);
                 CGPoint point = tElementPoint(type, bitMap.movePoint, points, t);
-                if (i > 0) {
+                if (i == 1) {
+                    if (!bitMap.hasFoundFirstPoint) {   //找到首点，首点不计长度，先画一个
+                        bitMap.hasFoundFirstPoint = YES;
+                        DrawPoint(bitMap, bitMap.lastPoint, point, lineWidth);
+                    }
+                }
+                else if (i > 1) {
                     CGFloat length = sqrt(pow(bitMap.lastPoint.x - point.x, 2) + pow(bitMap.lastPoint.y - point.y, 2)) + bitMap.extraLength;
                     if (length >= pointSpace) {
                         DrawPoint(bitMap, bitMap.lastPoint, point, lineWidth);

@@ -33,6 +33,9 @@
         case AnyBrushType_Fish:     ///< 鱼形笔
             return @"stylishbrush_fish";
             break;
+        case AnyBrushType_Crayon:   ///< 蜡笔
+            return @"stylishbrush_oil_pastel";
+            break;
     }
 }
 
@@ -59,6 +62,9 @@
         case AnyBrushType_Fish:     ///< 鱼形笔
             return @"main_brush_icon_26";
             break;
+        case AnyBrushType_Crayon:   ///< 蜡笔
+            return @"main_brush_icon_14";
+            break;
     }
 }
 
@@ -84,6 +90,9 @@
             break;
         case AnyBrushType_Fish:     ///< 鱼形笔
             return @"brush_49";
+            break;
+        case AnyBrushType_Crayon:   ///< 蜡笔
+            return @"brush_05";
             break;
     }
 }
