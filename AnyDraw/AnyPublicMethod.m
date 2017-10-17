@@ -30,6 +30,9 @@
         case AnyBrushType_Eraser:   ///< 橡皮擦
             return @"stylishbrush_head_eraser";
             break;
+        case AnyBrushType_Fish:     ///< 鱼形笔
+            return @"stylishbrush_fish";
+            break;
     }
 }
 
@@ -53,6 +56,9 @@
         case AnyBrushType_Eraser:   ///< 橡皮擦
             return @"main_brush_icon_07";
             break;
+        case AnyBrushType_Fish:     ///< 鱼形笔
+            return @"main_brush_icon_26";
+            break;
     }
 }
 
@@ -75,6 +81,9 @@
             break;
         case AnyBrushType_Eraser:   ///< 橡皮擦
             return @"----";
+            break;
+        case AnyBrushType_Fish:     ///< 鱼形笔
+            return @"brush_49";
             break;
     }
 }

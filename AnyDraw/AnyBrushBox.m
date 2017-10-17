@@ -123,6 +123,7 @@ static NSArray *Brushs() {
              @(AnyBrushType_TiltPen),
              @(AnyBrushType_MiPen),
              @(AnyBrushType_Spray),
+             @(AnyBrushType_Fish),
              @(AnyBrushType_Eraser),
              ];
 }

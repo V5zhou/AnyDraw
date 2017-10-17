@@ -12,7 +12,8 @@
 
 @property (nonatomic, assign) CGContextRef map;
 @property (nonatomic, strong) AnyContext *context;
-@property (nonatomic, assign) CGPoint lastPoint;
+@property (nonatomic, assign) CGPoint lastStrokePoint;  //上次绘制点
+@property (nonatomic, assign) CGPoint movePoint;        //记录move动作
 @property (nonatomic, strong) UIImage *drawImage;
 
 @end
@@ -71,6 +72,7 @@ static CGFloat LineWidth(AnyContext *context, CGFloat pathLength) {
     CGFloat lineWidth = context.lineWidth;
     switch (context.brushType) {
         case AnyBrushType_MiPen:
+        case AnyBrushType_Spray:
         {
             CGFloat maxWidth = lineWidth;
             CGFloat minWidth = lineWidth/3; //笔画画最快时，最小宽度限制。免得细的看不到了
@@ -84,24 +86,26 @@ static CGFloat LineWidth(AnyContext *context, CGFloat pathLength) {
     return lineWidth;
 }
 
-
 /**
- 一个bezier区间的分段段数
- 因为绘制方式为小方格绘制在分段点point上，小方格size = (lineWidth, lineWidth)，有多少个分段点就有多少个小方格。
- 不能让路径出现断裂，所以在线宽不同时，对应的间距也要做调整。
+ 一个线宽长度上分段段数，段数越多绘制点越密集
  */
-static NSInteger Sections(AnyContext *context, CGFloat roughlyLength, CGFloat lineWidth) {
-    NSInteger sections = (int)(roughlyLength*4/lineWidth) + 1;  //每段长度为线宽的4分之1
+static NSInteger PointsEachWidth(AnyContext *context) {
+    NSInteger widthPoints = 1;
     switch (context.brushType) {
-        case AnyBrushType_MiPen: {
-            sections = (int)(roughlyLength*1/lineWidth) + 1;    //米字就一个线宽一个米字
-        }
+        case AnyBrushType_MiPen:
+            widthPoints = 2;
+            break;
+        case AnyBrushType_TiltPen:
+            widthPoints = 4;
+            break;
+        case AnyBrushType_Spray:
+            widthPoints = 5;
             break;
             
         default:
             break;
     }
-    return sections;
+    return widthPoints;
 }
 
 #pragma mark - 主要绘图方法：
@@ -114,29 +118,39 @@ static void DrawLayerCGPathApply(void * __nullable info, const CGPathElement *el
     CGPoint *points = element->points;
     CGPathElementType type = element->type;
     
-    //长度估算
-    CGFloat roughlyLength = ElementRoughlyLength(type, bitMap.lastPoint, points);
-    
-    //宽度计算
-    CGFloat lineWidth = LineWidth(bitMap.context, roughlyLength);
-    
-    //分段数
-    NSInteger sections = Sections(bitMap.context, roughlyLength, lineWidth);
-    
     switch(type) {
         case kCGPathElementMoveToPoint: {
-            bitMap.lastPoint = points[0];
+            bitMap.movePoint = points[0];
         }
             break;
         case kCGPathElementAddLineToPoint:      // contains 1 point
         case kCGPathElementAddQuadCurveToPoint: // contains 2 points
         case kCGPathElementAddCurveToPoint:     // contains 3 points
         {
-            for (NSInteger i = 1; i <= sections; i++) {
-                CGFloat t = i/(CGFloat)sections;
-                CGPoint point = tElementPoint(type, bitMap.lastPoint, points, t);
-                CGRect rect = CGRectMake(point.x - lineWidth/2, point.y - lineWidth/2, lineWidth, lineWidth);
-                CGContextDrawImage( bitMap.map, rect, bitMap.drawImage.CGImage );
+            //长度估算
+            CGFloat roughlyLength = ElementRoughlyLength(type, bitMap.movePoint, points);
+            //宽度计算
+            CGFloat lineWidth = LineWidth(bitMap.context, roughlyLength);
+            //每个线宽N个点
+            NSInteger widthPoints = PointsEachWidth(bitMap.context);
+            //点之间距离
+            CGFloat pointSpace = lineWidth/widthPoints;
+            //此bezier上点个数
+            CGFloat pointNum = MAX(roughlyLength/pointSpace, 1);
+            
+            //绘制
+            CGPoint lastPoint = CGPointZero;
+            for (NSInteger i = 0; i <= pointNum * 3; i++) {
+                CGFloat t = i/(pointNum * 3);
+                CGPoint point = tElementPoint(type, bitMap.movePoint, points, t);
+                if (i > 0) {
+                    CGFloat length = sqrt(pow(bitMap.lastStrokePoint.x - point.x, 2) + pow(bitMap.lastStrokePoint.y - point.y, 2));
+                    if (length >= pointSpace) {
+                        DrawPoint(bitMap, lastPoint, point, lineWidth);
+                        bitMap.lastStrokePoint = point;
+                    }
+                }
+                lastPoint = point;
             }
         }
             break;
@@ -145,11 +159,27 @@ static void DrawLayerCGPathApply(void * __nullable info, const CGPathElement *el
     }
 }
 
+
+/**
+ 绘制点
+ */
+static void DrawPoint(AnyBitMap *bitMap, CGPoint lastPoint, CGPoint curruntPoint, CGFloat lineWidth) {
+    CGContextSaveGState(bitMap.map);
+    CGContextTranslateCTM(bitMap.map, curruntPoint.x, curruntPoint.y);
+    if (bitMap.context.brushType == AnyBrushType_Fish) {
+        CGFloat rotate = atan2(curruntPoint.y - lastPoint.y, curruntPoint.x - lastPoint.x);
+        CGContextRotateCTM(bitMap.map, rotate - M_PI_2);
+    }
+    CGRect rect = CGRectMake(-lineWidth/2, -lineWidth/2, lineWidth, lineWidth);
+    CGContextDrawImage( bitMap.map, rect, bitMap.drawImage.CGImage );
+    CGContextRestoreGState(bitMap.map);
+}
+
 /**
  bezier节点-->曲线大致长度
  */
 static CGFloat ElementRoughlyLength(CGPathElementType type, CGPoint Point0, CGPoint *Points) {
-    NSInteger sectionNum = 20;      //分段越多，长度越精确，但计算量越大。暂定20
+    NSInteger sectionNum = 200;      //分段越多，长度越精确，但计算量越大。暂定200
     CGFloat length = 0;
     CGPoint previousPoint = Point0;
     switch (type) {

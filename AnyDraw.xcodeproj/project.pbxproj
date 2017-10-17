@@ -265,6 +265,7 @@
 				TargetAttributes = {
 					FC57EE5B1F7E2DCB00B425F4 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = YH6XM8252K;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -495,7 +496,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YH6XM8252K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AnyDraw/PrefixHeader.pch;
 				INFOPLIST_FILE = AnyDraw/Info.plist;
@@ -513,7 +514,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YH6XM8252K;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AnyDraw/PrefixHeader.pch;
 				INFOPLIST_FILE = AnyDraw/Info.plist;

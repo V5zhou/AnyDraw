@@ -36,7 +36,7 @@
             _maxWidth = 50;
             _minWidth = 10;
             _lineWidth = 15;
-            _strokeColor = [UIColor colorWithHex:0x20b0dc andAlpha:0.8];
+            _strokeColor = [UIColor colorWithHex:0x42125c andAlpha:0.8];
         }
             break;
         case AnyBrushType_MiPen:
@@ -44,7 +44,7 @@
             _maxWidth = 40;
             _minWidth = 15;
             _lineWidth = 20;
-            _strokeColor = [UIColor colorWithHex:0x53bef8 andAlpha:0.8];
+            _strokeColor = [UIColor colorWithHex:0xe93e47 andAlpha:0.8];
         }
             break;
         case AnyBrushType_Spray:
@@ -55,6 +55,14 @@
             _strokeColor = [UIColor colorWithHex:0x20b0dc andAlpha:0.8];
         }
             break;
+        case AnyBrushType_Fish:
+        {
+            _maxWidth = 50;
+            _minWidth = 10;
+            _lineWidth = 24;
+            _strokeColor = [UIColor colorWithHex:0xb020dc andAlpha:0.8];
+        }
+            break;
         case AnyBrushType_Eraser:
         {
             _maxWidth = 30;
@@ -62,9 +70,6 @@
             _lineWidth = 6;
             _strokeColor = [UIColor clearColor];
         }
-            break;
-            
-        default:
             break;
     }
 }
