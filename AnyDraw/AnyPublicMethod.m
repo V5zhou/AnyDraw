@@ -36,6 +36,9 @@
         case AnyBrushType_Crayon:   ///< 蜡笔
             return @"stylishbrush_oil_pastel";
             break;
+        case AnyBrushType_Oil:      ///< 油彩笔
+            return @"stylishbrush_oil";
+            break;
     }
 }
 
@@ -65,6 +68,9 @@
         case AnyBrushType_Crayon:   ///< 蜡笔
             return @"main_brush_icon_14";
             break;
+        case AnyBrushType_Oil:      ///< 油彩笔
+            return @"main_brush_icon_11";
+            break;
     }
 }
 
@@ -93,6 +99,9 @@
             break;
         case AnyBrushType_Crayon:   ///< 蜡笔
             return @"brush_05";
+            break;
+        case AnyBrushType_Oil:      ///< 油彩笔
+            return @"brush_22";
             break;
     }
 }

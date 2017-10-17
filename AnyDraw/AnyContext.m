@@ -79,6 +79,12 @@
             _strokeColor = [UIColor colorWithHex:0xff1111 andAlpha:0.8];
         }
             break;
+        case AnyBrushType_Oil:      ///< 油彩笔
+            _maxWidth = 30;
+            _minWidth = 10;
+            _lineWidth = 14;
+            _strokeColor = [UIColor colorWithHex:0xff1111 andAlpha:0.8];
+            break;
     }
 }
 

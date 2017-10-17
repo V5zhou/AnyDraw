@@ -126,6 +126,7 @@ static NSArray *Brushs() {
              @(AnyBrushType_Fish),
              @(AnyBrushType_Eraser),
              @(AnyBrushType_Crayon),
+             @(AnyBrushType_Oil),
              ];
 }
 

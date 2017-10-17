@@ -52,6 +52,7 @@
                 }
             }
         }];
+        //把纹理图片设置bitmap的mask
         CGContextClipToMask(bitMap.map, CGRectMake(0, 0, size.width * scale, size.height * scale), texttureImage.CGImage);
     }
     CGContextScaleCTM(bitMap.map, scale, scale);
@@ -64,7 +65,9 @@
 
 - (void)endBitMap {
     if (self.map) {
-        CGContextRelease(self.map);
+        @try {
+            CGContextRelease(self.map);
+        } @catch (NSException *exception) { } @finally { }
     }
 }
 
@@ -129,6 +132,9 @@ static CGFloat PointsEachWidth(AnyContext *context) {
             break;
         case AnyBrushType_Crayon:
             widthPoints = 6;
+            break;
+        case AnyBrushType_Oil:
+            widthPoints = 10;
             break;
             
         default:
@@ -203,7 +209,8 @@ static void DrawPoint(AnyBitMap *bitMap, CGPoint lastPoint, CGPoint curruntPoint
     CGContextSaveGState(bitMap.map);
     CGContextTranslateCTM(bitMap.map, curruntPoint.x, curruntPoint.y);
     if (bitMap.context.brushType == AnyBrushType_Fish ||
-        bitMap.context.brushType == AnyBrushType_MiPen) {
+        bitMap.context.brushType == AnyBrushType_MiPen ||
+        bitMap.context.brushType == AnyBrushType_Oil) {
         CGFloat rotate = atan2(curruntPoint.y - lastPoint.y, curruntPoint.x - lastPoint.x);
         CGContextRotateCTM(bitMap.map, rotate - M_PI_2);
     }
