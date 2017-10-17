@@ -26,33 +26,35 @@
     AnyBitMap *bitMap = [[AnyBitMap alloc] init];
     bitMap.context = context;
     
+    NSInteger scale = [UIScreen mainScreen].scale;
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     bitMap.map = CGBitmapContextCreate(NULL,
-                                    size.width,
-                                    size.height,
+                                    size.width * scale,
+                                    size.height * scale,
                                     8,
-                                    4 * size.width,
+                                    4 * size.width * scale,
                                     colorSpace,
                                     kCGImageAlphaPremultipliedLast);
     
     if (context.brushType == AnyBrushType_Crayon) {
         //绘制蜡笔纹理图片
         UIImage *image = [UIImage imageNamed:@"texture01"];
-        UIImage *texttureImage = [UIImage imageWithSize:size drawBlock:^(CGContextRef context) {
+        UIImage *texttureImage = [UIImage imageWithSize:CGSizeMake(size.width * scale, size.height * scale) drawBlock:^(CGContextRef context) {
             for (NSInteger i = 0; ; i++) {
-                if (image.size.height * i > size.height) {
+                if (image.size.height * i > size.height * scale) {
                     break;
                 }
                 for (NSInteger j = 0; ; j++) {
-                    if (image.size.width * j > size.width) {
+                    if (image.size.width * j > size.width * scale) {
                         break;
                     }
                     CGContextDrawImage(context, CGRectMake(image.size.width * j, image.size.height * i, image.size.width, image.size.height), image.CGImage);
                 }
             }
         }];
-        CGContextClipToMask(bitMap.map, CGRectMake(0, 0, size.width, size.height), texttureImage.CGImage);
+        CGContextClipToMask(bitMap.map, CGRectMake(0, 0, size.width * scale, size.height * scale), texttureImage.CGImage);
     }
+    CGContextScaleCTM(bitMap.map, scale, scale);
     CGContextTranslateCTM(bitMap.map, 0, size.height);
     CGContextScaleCTM(bitMap.map, 1.0, -1.0);
     CGColorSpaceRelease( colorSpace );
@@ -115,6 +117,9 @@ static CGFloat PointsEachWidth(AnyContext *context) {
     switch (context.brushType) {
         case AnyBrushType_MiPen:
             widthPoints = 1.5;
+            break;
+        case AnyBrushType_Fish:
+            widthPoints = 1.2;
             break;
         case AnyBrushType_TiltPen:
             widthPoints = 4;

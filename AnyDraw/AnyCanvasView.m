@@ -16,7 +16,6 @@
 @property (nonatomic, strong) NSMutableDictionary *contexts;///< 绘制环境列表：缓存为字典，每种画笔环境独立控制
 
 @property (nonatomic, strong) CAShapeLayer *shapLayer;      ///< 中间层layer：绘制中的path或bitmap图片，实时绘制到此layer上
-//@property (nonatomic, strong) CALayer *maskLayer;
 
 //绘制方式有两种，一种path，一种bitmap
 @property (nonatomic, strong) AnyBitMap *bitmap;
@@ -44,11 +43,6 @@
     layer.lineCap = kCALineCapRound;
     [self.layer addSublayer:layer];
     self.shapLayer = layer;
-    
-//    //mask
-//    self.maskLayer = [CALayer layer];
-//    _maskLayer.frame = self.bounds;
-//    _maskLayer.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"texture01"]].CGColor;
     
     //初始化设置为圆珠笔
     _curruntBrushType = AnyBrushType_BallPen;
@@ -120,12 +114,6 @@
 
                     [weakSelf.bitmap addBezier:bezier resultImage:^(UIImage *image) {
                         weakSelf.shapLayer.contents = (__bridge id _Nullable)(image.CGImage);
-//                        if (weakSelf.curruntContext.brushType == AnyBrushType_Crayon) {
-//                            weakSelf.shapLayer.mask = weakSelf.maskLayer;
-//                        }
-//                        else {
-//                            weakSelf.shapLayer.mask = nil;
-//                        }
                         layerRefreshFinishedCallBack();
                     }];
                     
