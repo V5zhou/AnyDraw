@@ -27,5 +27,6 @@
 #import "AnyContext.h"
 #import "AnyPath.h"
 #import "AnyPublicMethod.h"
+#import "AnyQueue.h"
 
 #endif /* PrefixHeader_pch */

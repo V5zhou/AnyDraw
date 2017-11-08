@@ -25,6 +25,7 @@
 		FC57EE921F7E2FEE00B425F4 /* AnyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE911F7E2FEE00B425F4 /* AnyPath.m */; };
 		FC57EE961F7E30E400B425F4 /* AnyContext.m in Sources */ = {isa = PBXBuildFile; fileRef = FC57EE951F7E30E400B425F4 /* AnyContext.m */; };
 		FC57EE981F7E3B1D00B425F4 /* AnyDrawMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC57EE971F7E3B1D00B425F4 /* AnyDrawMainView.xib */; };
+		FCAE4E411FB02E7200529499 /* AnyQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAE4E401FB02E7200529499 /* AnyQueue.m */; };
 		FCDE40451F8B0C410097A0A1 /* AnyPublicMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE40441F8B0C410097A0A1 /* AnyPublicMethod.m */; };
 		FCDE404E1F8B242F0097A0A1 /* AnyCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE404D1F8B242F0097A0A1 /* AnyCanvasView.m */; };
 		FCDE40541F8B5FD10097A0A1 /* UIView+category.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDE40531F8B5FD10097A0A1 /* UIView+category.m */; };
@@ -72,6 +73,8 @@
 		FC57EE941F7E30E400B425F4 /* AnyContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyContext.h; sourceTree = "<group>"; };
 		FC57EE951F7E30E400B425F4 /* AnyContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyContext.m; sourceTree = "<group>"; };
 		FC57EE971F7E3B1D00B425F4 /* AnyDrawMainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnyDrawMainView.xib; sourceTree = "<group>"; };
+		FCAE4E3F1FB02E7200529499 /* AnyQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnyQueue.h; sourceTree = "<group>"; };
+		FCAE4E401FB02E7200529499 /* AnyQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnyQueue.m; sourceTree = "<group>"; };
 		FCDE40431F8B0C410097A0A1 /* AnyPublicMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyPublicMethod.h; sourceTree = "<group>"; };
 		FCDE40441F8B0C410097A0A1 /* AnyPublicMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnyPublicMethod.m; sourceTree = "<group>"; };
 		FCDE404C1F8B242F0097A0A1 /* AnyCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnyCanvasView.h; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 				FCDE404D1F8B242F0097A0A1 /* AnyCanvasView.m */,
 				FCDE405E1F8C60000097A0A1 /* AnyBitMap.h */,
 				FCDE405F1F8C60000097A0A1 /* AnyBitMap.m */,
+				FCAE4E3F1FB02E7200529499 /* AnyQueue.h */,
+				FCAE4E401FB02E7200529499 /* AnyQueue.m */,
 			);
 			name = MainView;
 			sourceTree = "<group>";
@@ -359,6 +364,7 @@
 				FC57EE851F7E2DDB00B425F4 /* NSString+size.m in Sources */,
 				FC57EE8F1F7E2EB900B425F4 /* AnyDrawMainView.m in Sources */,
 				FC57EE961F7E30E400B425F4 /* AnyContext.m in Sources */,
+				FCAE4E411FB02E7200529499 /* AnyQueue.m in Sources */,
 				FC57EE861F7E2DDB00B425F4 /* NSTimer+block.m in Sources */,
 				FC57EE671F7E2DCB00B425F4 /* ViewController.m in Sources */,
 				FCDE405C1F8B6DE40097A0A1 /* AnyColorBox.m in Sources */,

@@ -20,21 +20,31 @@
 
 @end
 
+//创建bitMap
+CGContextRef BitMapCreate(CGSize size, CGFloat scale) {
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef bitMap = CGBitmapContextCreate(NULL,
+                                       size.width * scale,
+                                       size.height * scale,
+                                       8,
+                                       4 * size.width * scale,
+                                       colorSpace,
+                                       kCGImageAlphaPremultipliedLast);
+    CGContextScaleCTM(bitMap, scale, scale);
+    CGContextTranslateCTM(bitMap, 0, size.height);
+    CGContextScaleCTM(bitMap, 1.0, -1.0);
+    CGColorSpaceRelease( colorSpace );
+    return bitMap;
+}
+
 @implementation AnyBitMap
 
 + (instancetype)createWithSize:(CGSize)size context:(AnyContext *)context {
+    NSInteger scale = [UIScreen mainScreen].scale;
+    
     AnyBitMap *bitMap = [[AnyBitMap alloc] init];
     bitMap.context = context;
-    
-    NSInteger scale = [UIScreen mainScreen].scale;
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    bitMap.map = CGBitmapContextCreate(NULL,
-                                    size.width * scale,
-                                    size.height * scale,
-                                    8,
-                                    4 * size.width * scale,
-                                    colorSpace,
-                                    kCGImageAlphaPremultipliedLast);
+    bitMap.map = BitMapCreate(size, scale);
     
     if (context.brushType == AnyBrushType_Crayon) {
         //绘制蜡笔纹理图片
@@ -55,11 +65,7 @@
         //把纹理图片设置bitmap的mask
         CGContextClipToMask(bitMap.map, CGRectMake(0, 0, size.width * scale, size.height * scale), texttureImage.CGImage);
     }
-    CGContextScaleCTM(bitMap.map, scale, scale);
-    CGContextTranslateCTM(bitMap.map, 0, size.height);
-    CGContextScaleCTM(bitMap.map, 1.0, -1.0);
-    CGColorSpaceRelease( colorSpace );
-    
+
     return bitMap;
 }
 
@@ -73,18 +79,18 @@
 
 - (void)addBezier:(UIBezierPath *)bezier resultImage:(void(^)(UIImage *image))resultImage {
     kWeakSelf
-    AsyncSerierBitMapQueue(^{
+    [[AnyQueue serierQueue] addOperationWithBlock:^{
         CGPathApply(bezier.CGPath, (__bridge void * _Nullable)(weakSelf), DrawLayerCGPathApply);
         //取出图片
         CGImageRef cgImage = CGBitmapContextCreateImage(weakSelf.map);
         UIImage *image = [UIImage imageWithCGImage:cgImage];
         CGImageRelease(cgImage);
         if (resultImage) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+            [[AnyQueue mainQueue] addOperationWithBlock:^{
                 resultImage(image);
-            });
+            }];
         }
-    });
+    }];
 }
 
 #pragma mark - 线宽与分段数
@@ -102,7 +108,7 @@ static CGFloat LineWidth(AnyContext *context, CGFloat pathLength) {
         {
             CGFloat maxWidth = lineWidth;
             CGFloat minWidth = lineWidth/3; //笔画画最快时，最小宽度限制。免得细的看不到了
-            lineWidth = minWidth + (maxWidth - minWidth) * (20/MAX(20, pathLength));
+            lineWidth = minWidth + (maxWidth - minWidth) * (10/MAX(10, pathLength));
         }
             break;
             
@@ -301,22 +307,6 @@ static CGPoint tElementPoint(CGPathElementType type, CGPoint Point0, CGPoint *po
         _drawImage = [image imageWithColor:_context.strokeColor];
     }
     return _drawImage;
-}
-
-//异步串行队列执行
-void AsyncSerierBitMapQueue(void(^threadContents)(void)) {
-    static dispatch_queue_t queue;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-#ifdef __IPHONE_8_0
-        dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_DEFAULT, 0);
-        queue = dispatch_queue_create("com.AnyBitMap.caculate", attr);
-#else
-        queue = dispatch_queue_create("com.AnyBitMap.caculate", DISPATCH_QUEUE_SERIAL);
-        dispatch_set_target_queue(queue, dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0));
-#endif
-    });
-    dispatch_async(queue, threadContents);
 }
 
 @end

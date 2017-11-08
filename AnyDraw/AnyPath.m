@@ -35,9 +35,9 @@
  */
 - (void)asyncMoveToPoint:(CGPoint)point touchType:(AnyTouchesType)touchType {
     kWeakSelf
-    AsyncSerierAnyPathQueue(^{
+    [[AnyQueue concurrenceQueue] addOperationWithBlock:^{
         [weakSelf moveToPoint:point touchType:touchType];
-    });
+    }];
 }
 
 /**
@@ -71,14 +71,14 @@
     //回调
     if (_callBack) {
         kWeakSelf
-        dispatch_async(dispatch_get_main_queue(), ^{
+        [[AnyQueue mainQueue] addOperationWithBlock:^{
             if ([weakSelf isNeedBitMap]) {  //bitMap方式，回调新增bezier;path方式，回调整个bezier。
                 weakSelf.callBack(YES, addPath, touchType);
             }
             else {
                 weakSelf.callBack(NO, weakSelf.bezier, touchType);
             }
-        });
+        }];
     }
 }
 
@@ -130,22 +130,6 @@
         return NO;
     }
     return YES;
-}
-
-//异步串行队列执行
-void AsyncSerierAnyPathQueue(void(^threadContents)(void)) {
-    static dispatch_queue_t queue;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-#ifdef __IPHONE_8_0
-        dispatch_queue_attr_t attr = dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_DEFAULT, 0);
-        queue = dispatch_queue_create("com.AnyPath.caculate", attr);
-#else
-        queue = dispatch_queue_create("com.AnyPath.caculate", DISPATCH_QUEUE_SERIAL);
-        dispatch_set_target_queue(queue, dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0));
-#endif
-    });
-    dispatch_async(queue, threadContents);
 }
 
 @end
