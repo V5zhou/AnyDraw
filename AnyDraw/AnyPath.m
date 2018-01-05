@@ -70,13 +70,12 @@
     
     //回调
     if (_callBack) {
-        kWeakSelf
         [[AnyQueue mainQueue] addOperationWithBlock:^{
-            if ([weakSelf isNeedBitMap]) {  //bitMap方式，回调新增bezier;path方式，回调整个bezier。
-                weakSelf.callBack(YES, addPath, touchType);
+            if ([self isNeedBitMap]) {  //bitMap方式，回调新增bezier;path方式，回调整个bezier。
+                self.callBack(YES, addPath, touchType);
             }
             else {
-                weakSelf.callBack(NO, weakSelf.bezier, touchType);
+                self.callBack(NO, self.bezier, touchType);
             }
         }];
     }

@@ -19,6 +19,7 @@
 
 //绘制方式有两种，一种path，一种bitmap
 @property (nonatomic, strong) AnyBitMap *bitmap;
+@property (nonatomic, strong) NSMutableSet *bitmapSet;       ///< 添加一个set，防止绘制任务还未完成时，就已经释放bitmap导致的crash
 
 @end
 
@@ -43,6 +44,8 @@
     layer.lineCap = kCALineCapRound;
     [self.layer addSublayer:layer];
     self.shapLayer = layer;
+    
+    _bitmapSet = [NSMutableSet set];
     
     //初始化设置为圆珠笔
     _curruntBrushType = AnyBrushType_BallPen;
@@ -77,7 +80,7 @@
     kWeakSelf
     self.curruntPath = [AnyPath createWithContext:_curruntContext callBack:^(BOOL isBitmap, UIBezierPath *bezier, AnyTouchesType touchType) {
         //当前layer更新后回调
-        void (^layerRefreshFinishedCallBack)(void) = ^() {
+        void (^layerRefreshFinishedCallBack)(AnyBitMap *bitMap) = ^(AnyBitMap *bitMap) {
             
             if (touchType == AnyTouchesType_end) {
                 //开始生成图片
@@ -92,7 +95,11 @@
                 //清除子layer当前笔,准备接收下一笔
                 if (isBitmap) {
                     weakSelf.shapLayer.contents = nil;
-                    [weakSelf.bitmap endBitMap];
+                    if (bitMap) {
+                        [weakSelf.bitmap endBitMap];               //直接通知结束绘制，即使线程中仍然有正在绘制的path
+                        [weakSelf.bitmapSet removeObject:bitMap];  //移除出数组
+                        weakSelf.bitmap = nil;
+                    }
                 }
                 else {
                     weakSelf.shapLayer.path = nil;
@@ -105,16 +112,17 @@
             switch (touchType) {
                 case AnyTouchesType_began:
                 {
-                    weakSelf.bitmap = [AnyBitMap createWithSize:weakSelf.frame.size context:weakSelf.curruntContext];
+                    AnyBitMap *bitmap = [AnyBitMap createWithSize:weakSelf.frame.size context:weakSelf.curruntContext];
+                    [weakSelf.bitmapSet addObject:bitmap];  //添加进数组
+                    weakSelf.bitmap = bitmap;
                 }
                     break;
                 case AnyTouchesType_move:
                 case AnyTouchesType_end:
                 {
-
-                    [weakSelf.bitmap addBezier:bezier resultImage:^(UIImage *image) {
+                    [weakSelf.bitmap addBezier:bezier resultImage:^(AnyBitMap *bitMap, UIImage *image) {
                         weakSelf.shapLayer.contents = (__bridge id _Nullable)(image.CGImage);
-                        layerRefreshFinishedCallBack();
+                        layerRefreshFinishedCallBack(bitMap);
                     }];
                     
                 }
@@ -132,7 +140,7 @@
                 layer.lineWidth = weakSelf.curruntContext.lineWidth;
                 layer.path = bezier.CGPath;
             }
-            layerRefreshFinishedCallBack();
+            layerRefreshFinishedCallBack(nil);
         }
     }];
     [_curruntPath asyncMoveToPoint:TouchPoint(touches) touchType:AnyTouchesType_began];

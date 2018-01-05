@@ -13,6 +13,6 @@
 + (instancetype)createWithSize:(CGSize)size context:(AnyContext *)context;
 - (void)endBitMap;
 
-- (void)addBezier:(UIBezierPath *)bezier resultImage:(void(^)(UIImage *image))resultImage;
+- (void)addBezier:(UIBezierPath *)bezier resultImage:(void(^)(AnyBitMap *bitMap, UIImage *image))resultImage;
 
 @end

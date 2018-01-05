@@ -17,6 +17,7 @@
 @property (nonatomic, assign) CGFloat extraLength;      //多余长度
 @property (nonatomic, assign) CGPoint movePoint;        //记录move动作
 @property (nonatomic, strong) UIImage *drawImage;
+@property (nonatomic, assign) BOOL endDrawingFlag;      //结果绘制标识
 
 @end
 
@@ -70,24 +71,26 @@ CGContextRef BitMapCreate(CGSize size, CGFloat scale) {
 }
 
 - (void)endBitMap {
-    if (self.map) {
-        @try {
-            CGContextRelease(self.map);
-        } @catch (NSException *exception) { } @finally { }
+    if (self && self.map) {
+        self.endDrawingFlag = YES;
+        CGContextRelease(self.map);
+        self.map = nil;
     }
 }
 
-- (void)addBezier:(UIBezierPath *)bezier resultImage:(void(^)(UIImage *image))resultImage {
-    kWeakSelf
+- (void)addBezier:(UIBezierPath *)bezier resultImage:(void(^)(AnyBitMap *bitMap, UIImage *image))resultImage {
     [[AnyQueue serierQueue] addOperationWithBlock:^{
-        CGPathApply(bezier.CGPath, (__bridge void * _Nullable)(weakSelf), DrawLayerCGPathApply);
+        CGPathApply(bezier.CGPath, (__bridge void * _Nullable)(self), DrawLayerCGPathApply);
+        if (self.endDrawingFlag) {
+            return ;
+        }
         //取出图片
-        CGImageRef cgImage = CGBitmapContextCreateImage(weakSelf.map);
+        CGImageRef cgImage = CGBitmapContextCreateImage(self.map);
         UIImage *image = [UIImage imageWithCGImage:cgImage];
         CGImageRelease(cgImage);
         if (resultImage) {
             [[AnyQueue mainQueue] addOperationWithBlock:^{
-                resultImage(image);
+                resultImage(self, image);
             }];
         }
     }];
@@ -170,6 +173,9 @@ static void DrawLayerCGPathApply(void * __nullable info, const CGPathElement *el
         {
             //长度估算
             CGFloat roughlyLength = ElementRoughlyLength(type, bitMap.movePoint, points);
+            if (roughlyLength <= 0) {
+                return;
+            }
             //宽度计算
             CGFloat lineWidth = LineWidth(bitMap.context, roughlyLength);
             //每个线宽N个点
@@ -181,6 +187,10 @@ static void DrawLayerCGPathApply(void * __nullable info, const CGPathElement *el
             
             //绘制
             for (NSInteger i = 0; i <= pointNum * 10; i++) {
+                if (bitMap.endDrawingFlag) {
+                    return ;
+                }
+                
                 CGFloat t = i/(pointNum * 10);
                 CGPoint point = tElementPoint(type, bitMap.movePoint, points, t);
                 if (i == 1) {
@@ -212,17 +222,26 @@ static void DrawLayerCGPathApply(void * __nullable info, const CGPathElement *el
  绘制点
  */
 static void DrawPoint(AnyBitMap *bitMap, CGPoint lastPoint, CGPoint curruntPoint, CGFloat lineWidth) {
-    CGContextSaveGState(bitMap.map);
-    CGContextTranslateCTM(bitMap.map, curruntPoint.x, curruntPoint.y);
+    if (bitMap.endDrawingFlag) {
+        return ;
+    }
+    
+    //先retain一下，避免绘制过程中突然释放
+    CGContextRef map = CGContextRetain(bitMap.map);
+    
+    CGContextSaveGState(map);
+    CGContextTranslateCTM(map, curruntPoint.x, curruntPoint.y);
     if (bitMap.context.brushType == AnyBrushType_Fish ||
         bitMap.context.brushType == AnyBrushType_MiPen ||
         bitMap.context.brushType == AnyBrushType_Oil) {
         CGFloat rotate = atan2(curruntPoint.y - lastPoint.y, curruntPoint.x - lastPoint.x);
-        CGContextRotateCTM(bitMap.map, rotate - M_PI_2);
+        CGContextRotateCTM(map, rotate - M_PI_2);
     }
     CGRect rect = CGRectMake(-lineWidth/2, -lineWidth/2, lineWidth, lineWidth);
-    CGContextDrawImage( bitMap.map, rect, bitMap.drawImage.CGImage );
-    CGContextRestoreGState(bitMap.map);
+    CGContextDrawImage( map, rect, bitMap.drawImage.CGImage );
+    CGContextRestoreGState(map);
+    
+    CGContextRelease(map);
 }
 
 /**
