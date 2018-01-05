@@ -16,7 +16,7 @@
 @property (nonatomic, assign) CGPoint lastPoint;        //上次点
 @property (nonatomic, assign) CGFloat extraLength;      //多余长度
 @property (nonatomic, assign) CGPoint movePoint;        //记录move动作
-@property (nonatomic, strong) UIImage *drawImage;
+@property (nonatomic, strong) UIImage *drawImage;       //画笔图片
 @property (nonatomic, assign) BOOL endDrawingFlag;      //结果绘制标识
 
 @end
